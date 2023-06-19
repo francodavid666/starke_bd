@@ -78,13 +78,13 @@ class client_register_form(forms.ModelForm):
 class client_register_form(forms.ModelForm):
      
    
-      ''' fecha_nacimiento= forms.DateField(widget=forms.DateInput(attrs={
+      fecha_nacimiento= forms.DateField(widget=forms.DateInput(attrs={
                                                                        'class':'form-control',
                                                                         'type':'date',
                                                                         'placeholder':'Fecha de nacimiento',
                                                                         'id':"DateEmail",
                                                                         'label':'Fecha de nacimiento'
-                                                                       },format = '%d/%m/%Y'), input_formats=settings.DATE_INPUT_FORMATS)'''
+                                                                       },format = '%d/%m/%Y'), input_formats=settings.DATE_INPUT_FORMATS)
       class Meta:
         model = client_register_model
         fields= '__all__'

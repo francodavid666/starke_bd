@@ -31,11 +31,13 @@ def table_pagos(request):
     
     
     form= client_register_model.objects.all()
-    form2= disciplinas_model.objects.all()
+ 
+    form2= len(client_register_model.objects.filter(nombre = True))
+    print(form2)
     return render(request,'starke_app/tables/table_pagos.html',{'form':form,
                                                                 'form2':form2
                                                                 })
-
+    print(form2)
 
 def table_salud(request):
     form= client_register_model.objects.all()

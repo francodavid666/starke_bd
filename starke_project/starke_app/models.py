@@ -25,7 +25,17 @@ class disciplinas_model(models.Model):
           return self.disciplina
      
 
+
+
+
+'''
+dia1 = datetime.datetime.now()
+dia2 = datetime.datetime(2023,6,19)
+restar = dia1 - dia2'''
+
 class client_register_model(models.Model):
+  
+    
 
     nombre=models.CharField(max_length=100,blank= True, null=True)
     apellido=models.CharField(max_length=100,blank= True, null=True)
@@ -97,10 +107,14 @@ class client_register_model(models.Model):
                                   choices= OPCIONES_PLAN,
                                   default=MENSUAL)
     
-
+    fecha_inicio = models.DateField(blank = True,null=True)
+    fecha_pago = models.DateField(blank= True, null=True)
+    pago = models.IntegerField(blank = True,null=True)
+    fecha_vencimiento = models.DateField(blank= True, null=True)
+    #cambiar pago por monto
+    
+   
+ 
     
 
-
-
-    
 
