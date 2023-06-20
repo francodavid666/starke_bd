@@ -9,7 +9,7 @@ import datetime
 from datetime import date
 
 
-
+#
 
 def index (request):
     conn = sqlite3.connect('db.sqlite3.bd')
