@@ -4,34 +4,30 @@ import datetime
 from datetime import date
 
 
-class profesores_model(models.Model):
-    profesor = models.CharField(max_length= 100, null=True,blank=True)
-    
-    
-    def __str__(self)-> str:
-          return self.profesor
-      
+
       
 class disciplinas_model(models.Model):
-
-    profesor = models.ForeignKey(profesores_model,
-                                   on_delete = models.CASCADE,
-                                   null=True,blank=True)
     disciplina = models.CharField(max_length= 100, null=True,blank=True)
-  
-    
-    
+
     def __str__(self)-> str:
           return self.disciplina
      
 
 
+class profesores_model(models.Model):
+    profesor = models.CharField(max_length= 100, null=True,blank=True)
+    disciplinas = models.ForeignKey(disciplinas_model,
+                                   on_delete = models.CASCADE,
+                                   null=True,blank=True)
+
+    def __str__(self)-> str:
+          return self.profesor
+    
+ 
+      
 
 
-'''
-dia1 = datetime.datetime.now()
-dia2 = datetime.datetime(2023,6,19)
-restar = dia1 - dia2'''
+
 
 class client_register_model(models.Model):
   
@@ -106,14 +102,17 @@ class client_register_model(models.Model):
                                   null=True,
                                   choices= OPCIONES_PLAN,
                                   default=MENSUAL)
-    
+    profesor = models.ForeignKey(profesores_model,
+                                   on_delete = models.CASCADE,
+                                   null=True,blank=True)
     fecha_inicio = models.DateField(blank = True,null=True)
     fecha_pago = models.DateField(blank= True, null=True)
     pago = models.IntegerField(blank = True,null=True)
     fecha_vencimiento = models.DateField(blank= True, null=True)
     #cambiar pago por monto
     
-   
+    def __str__(self)-> str:
+          return self.nombre 
  
     
 

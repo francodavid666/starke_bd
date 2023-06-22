@@ -19,34 +19,14 @@
                         <div class="row justify-content-center">
                             <div class="col-lg-7">
                                 <div class="card shadow-lg border-0 rounded-lg mt-5">
-                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Modificar plan de {{ nombre }} {{ apellido }} </h3></div>
+                                    <div class="card-header"><h3 class="text-center font-weight-light my-4">Modificar Pago</h3></div>
                                     <div class="card-body">
-                                        <form  action="{% url 'modificar_plan' id %}" method ='POST'>{% csrf_token %}
+                                        <form  action="{% url 'modificar_pago' id %}" method ='POST'>{% csrf_token %}
                                            
-                                         
-                                                    <div class="form-floating mb-3">
-                                                        <div class="form-floating">
-                                                        <select class="form-select" id="plan" {{ form.plan }}
-                                                        
-                                                   
-                                                        <label for="newField">Plan</label>
-                                                    </div>
-                                                </div>
-                                                <div class="form-floating mb-3">
-                                                    <div class="form-floating">
-                                                    <select class="form-select" id="diasALaSemanaDeEntranemiento" {{ form.dias }}
-                                                  
-                                                    </select>
-                                                    <label for="diasALaSemanaDeEntranemiento">Dias a la semana de entranemiento</label>
-                                                </div>
-                                            </div>
-                                                <div class="form-floating mb-3">
-                                                    <div class="form-floating">
-                                                    <select class="form-select" id="disciplina" {{ form.profesor }}
-                                                    
-                                                    </select>
-                                                    <label for="disciplina">Profesor Asignado</label>
-                                                </div>
+                                            <div class="form-floating mb-3">
+                                                {{ form.pago }}
+                                                <label for="agregarElPagoDelPlan">Agregar el pago del plan</label>
+                                                <div class="invalid-feedback" data-sb-feedback="agregarElPagoDelPlan:required">Agregar el pago del plan is required.</div>
                                             </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Aceptar datos"> </div>

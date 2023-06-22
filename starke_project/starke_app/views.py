@@ -47,6 +47,10 @@ def table_contacto(request):
     form= client_register_model.objects.all()
     return render(request,'starke_app/tables/table_contacto.html',{'form':form})
 
+def table_plan(request):
+    form= client_register_model.objects.all()
+    return render(request,'starke_app/tables/table_plan.html',{'form':form})
+
 def agregar_cliente(request):
     if request.method=='POST':
         formulario = client_register_form(request.POST)
@@ -101,69 +105,13 @@ def agregar_cliente(request):
 
 
 
-def agregar_cliente_salud(request):
-    if request.method=='POST':
-        formulario = client_salud_form(request.POST)
-        if formulario.is_valid():
-            info=formulario.cleaned_data
-            cardiacos_no=info.get('cardiacos_no')
-            cardiacos_si=info.get('cardiacos_si')
-            asma_no=info.get('asma_no')
-            asma_si=info.get('asma_si')
-            lesion_no=info.get('lesion_no')
-            lesion_si=info.get('lesion_si')
-            especificar_lesion=info.get('especificar_lesion')
-            telefono_emergencia=info.get('telefono_emergencia')
-
-        
-  
-            
-            cliente_1 = client_salud_model(cardiacos_no = cardiacos_no,
-                                              cardiacos_si = cardiacos_si,
-                                              asma_si = asma_si,
-                                              asma_no = asma_no,
-                                              lesion_no = lesion_no,
-                                              lesion_si = lesion_si,
-                                              especificar_lesion = especificar_lesion,
-                                                )
-            
-            cliente_1.save()
-            return redirect('agregar_cliente_plan')
-    else:      
-        form = client_salud_form()
-        return render(request,'starke_app/clientes/register_salud.html',{'form':form})
 
 
-
-def agregar_cliente_plan (request):
-    if request.method=='POST':
-        formulario = client_plan_form(request.POST)
-        if formulario.is_valid():
-            info=formulario.cleaned_data
-            disciplina=info.get('disciplina')
-            dias=info.get('dias')
-            plan=info.get('plan')
-            pago=info.get('pago')
-        
-
-            cliente_1 = cliente_plan_model(disciplina = disciplina,
-                                           dias = dias,
-                                           plan=plan,
-                                           pago=pago                                
-                                              )
-            cliente_1.save()
-            return redirect('agregar_cliente_salud')
-        else:
-            return redirect('agregar_cliente_plan')
-            messages.success (request,'¡Nuevo producto creado!')   
-    else:      
-        form = client_plan_form()
-        return render(request,'starke_app/clientes/register_plan.html',{'form':form})
     
     
     
 
-def modificar_plan(request,id):
+def modificar_pago(request,id):
     cliente = client_register_model.objects.get(id=id)
     if request.method=='POST':
         
@@ -180,8 +128,36 @@ def modificar_plan(request,id):
         form = client_register_form(initial={
         'pago':555
         })
-        return render(request,'starke_app/modificar/modificar_plan.html',{'form':form,'id':id}) 
+        return render(request,'starke_app/modificar/modificar_pago.html',{'form':form,'id':id}) 
     
+
+def modificar_plan(request,id):
+    cliente = client_register_model.objects.get(id=id)
+    if request.method=='POST':
+        
+        form = client_register_form(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            cliente.plan = info['plan']
+            cliente.dias = info['dias']
+            cliente.profesor = info['profesor']
+            
+            
+            cliente.save()
+            return redirect('table_plan')
+
+        
+    else:    
+        form = client_register_form(initial={
+        'plan':cliente.plan,
+        'dias':cliente.dias,
+        'profesor':cliente.profesor
+        })
+        return render(request,'starke_app/modificar/modificar_plan.html',{'form':form,'id':id,
+                                                                          'nombre':cliente.nombre,
+                                                                          'apellido':cliente.apellido}) 
+    
+
 
 def modificar_datos(request,id):
     cliente = client_register_model.objects.get(id=id)
@@ -263,4 +239,56 @@ def modificar_salud(request,id):
         })
         return render(request,'starke_app/modificar/modificar_salud.html',{'form':form,'id':id,
                                                                            'nombre':cliente.nombre,
-                                                                           'apellido':cliente.apellido})               
+                                                                           'apellido':cliente.apellido})
+        
+        
+        
+
+        
+        '''
+profesore
+profesores
+profesores
+'''        
+
+
+def profesores_tabla(request):
+        form= profesores_model.objects.all()
+        return render(request,'starke_app/profesores/profesores_tabla.html',{'form':form,'id':id})
+        
+        
+def agregar_profesor(request):
+    if request.method =='POST':
+        formulario = profesores_form(request.POST)
+        if formulario.is_valid():
+            info = formulario.cleaned_data
+            profesor= info.get('profesor')
+            disciplinas= info.get('disciplinas')
+            
+            profesor_1 = profesores_model(profesor = profesor,
+                                          disciplinas=disciplinas)
+            profesor_1.save()
+            return redirect('profesores_tabla')
+    else:         
+        form = profesores_form()
+        return render (request, 'starke_app/profesores/agregar_profesor.html',{'form':form}) 
+    
+
+def modificar_profesor(request,id):
+    profesor = profesores_model.objects.get(id=id)
+    if request.method=='POST':
+        form = profesores_form(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            profesor.profesor = info['profesor']
+            profesor.disciplinas=info['disciplinas']
+            
+            profesor.save()
+            return redirect('profesores_tabla')
+    else:
+        form= profesores_form(initial={
+                            'profesor':profesor.profesor,
+                            'disciplinas':profesor.disciplinas
+                        })
+        return render (request, 'starke_app/profesores/modificar_profesor.html',{'form':form,'id':id})
+              

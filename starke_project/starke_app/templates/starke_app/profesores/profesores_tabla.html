@@ -16,7 +16,7 @@
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
             <!-- Navbar Brand-->
-            <a class="navbar-brand ps-3" href="index.html">Start Bootstrap</a>
+            <a class="navbar-brand ps-3" href="index.html">Starke BD</a>
             <!-- Sidebar Toggle-->
             <button class="btn btn-link btn-sm order-1 order-lg-0 me-4 me-lg-0" id="sidebarToggle" href="#!"><i class="fas fa-bars"></i></button>
             <!-- Navbar Search-->
@@ -58,7 +58,7 @@
                             <div class="collapse" id="collapseLayouts" aria-labelledby="headingOne" data-bs-parent="#sidenavAccordion">
                                 <nav class="sb-sidenav-menu-nested nav">
                                     <a class="nav-link" href="{% url 'tables' %}">Clientes</a>
-                                    <a class="nav-link" href="layout-sidenav-light.html">Profesores</a>
+                                    <a class="nav-link" href="{% url 'profesores_tabla' %}">Profesores</a>
                                     <a class="nav-link" href="layout-sidenav-light.html">Negocio(prox)</a>
                                 </nav>
                             </div>
@@ -125,25 +125,19 @@
                                 Tabla de datos
                             </div>
                             <div class="card-body">
-                                <a href="{% url 'tables' %}"><button type="button" class="btn btn-primary">Datos</button></a> 
-                                <a href="{% url 'table_contacto' %}"><button type="button" class="btn btn-primary">Contacto</button></a> 
-
-                                <a href="{% url 'table_pagos' %}"> <button type="button" class="btn btn-secondary">Pagos</button></a>
-                                <a href="{% url 'table_plan' %}"> <button type="button" class="btn btn-secondary">Plan</button></a>
-                                <a href="{% url 'table_salud' %}"><button type="button" class="btn btn-success">Salud</button></a>
-                                <a href="{% url 'agregar_cliente' %}"><button type="button" class="btn btn-success">Agregar cliente</button></a>
-
+                               
+                                <a href="{% url 'agregar_profesor' %}"><button type="button" class="btn btn-success">Agregar profesor</button></a>
+                                
                                 <table id="datatablesSimple">
                               
                                     <thead>
                                      
                                         <tr>
                                             <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>Mail</th>
-                                            <th>Numero</th>
-                                            <th>Numero de emergencia</th>
-                                            <th>Nombre de n.emergecia</th>
+                                            <th>Disciplina</th>
+                                            <th>Alumnos</th>
+                                        
+                                           
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -159,12 +153,11 @@
                         
                                     {% for i in form %}
                                     <tr>                                          
-                                        <td> <a href="{% url 'modificar_contacto' i.id %}"> {{ i.nombre }} </a></td>
-                                        <td>{{ i.apellido }}</td>
-                                        <td>{{ i.email}}</td>
-                                        <td>{{ i.telefono }}</td>
-                                        <td>{{ i.telefono_emergencia }}</td>
-                                        <td>{{ i.nombre_emergencia}}</td>
+                                        <td> <a href="{% url 'modificar_profesor' i.id %}"> {{ i.profesor }} </a></td>
+                                        <td>{{ i.disciplinas  }}</td>
+                                        <td>{{ i.disciplinas }}</td>
+                                       
+                                     
                                    
                                     </tr>
                                     {% endfor %}

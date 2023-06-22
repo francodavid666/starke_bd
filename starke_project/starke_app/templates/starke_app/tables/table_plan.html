@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="es">
     <head>
-        
+       
         {% load static %}
         <meta charset="utf-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -12,6 +12,8 @@
         <link href="https://cdn.jsdelivr.net/npm/simple-datatables@7.1.2/dist/style.min.css" rel="stylesheet" />
         <link href="{% static 'starke_app/css/styles.css' %}" rel="stylesheet" />
         <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+        <script src="{% static 'starke_app/js/scripts.js' %}"></script>
+       
     </head>
     <body class="sb-nav-fixed">
         <nav class="sb-topnav navbar navbar-expand navbar-dark bg-dark">
@@ -39,6 +41,7 @@
                 </li>
             </ul>
         </nav>
+        <div class="hola">seco</div>
         <div id="layoutSidenav">
             <div id="layoutSidenav_nav">
                 <nav class="sb-sidenav accordion sb-sidenav-dark" id="sidenavAccordion">
@@ -47,7 +50,7 @@
                             <div class="sb-sidenav-menu-heading">Core</div>
                             <a class="nav-link" href="index.html">
                                 <div class="sb-nav-link-icon"><i class="fas fa-tachometer-alt"></i></div>
-                                Dashboards(Prox)
+                                Dashboards(prox)
                             </a>
                             <div class="sb-sidenav-menu-heading">Interface</div>
                             <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
@@ -89,6 +92,8 @@
                                             <a class="nav-link" href="401.html">401 Page</a>
                                             <a class="nav-link" href="404.html">404 Page</a>
                                             <a class="nav-link" href="500.html">500 Page</a>
+                                            <a href="{% url 'index' %}"><button type="button" class="btn btn-success">Agregar cliente</button></a>
+
                                         </nav>
                                     </div>
                                 </nav>
@@ -124,31 +129,35 @@
                                 <i class="fas fa-table me-1"></i>
                                 Tabla de datos
                             </div>
+                         
+                          
+                        
                             <div class="card-body">
-                                <a href="{% url 'tables' %}"><button type="button" class="btn btn-primary">Datos</button></a> 
-                                <a href="{% url 'table_contacto' %}"><button type="button" class="btn btn-primary">Contacto</button></a> 
+                                 <a href="{% url 'tables' %}"><button type="button" class="btn btn-primary">Datos</button></a> 
+                                 <a href="{% url 'table_contacto' %}"><button type="button" class="btn btn-primary">Contacto</button></a> 
 
-                                <a href="{% url 'table_pagos' %}"> <button type="button" class="btn btn-secondary">Pagos</button></a>
-                                <a href="{% url 'table_plan' %}"> <button type="button" class="btn btn-secondary">Plan</button></a>
-                                <a href="{% url 'table_salud' %}"><button type="button" class="btn btn-success">Salud</button></a>
-                                <a href="{% url 'agregar_cliente' %}"><button type="button" class="btn btn-success">Agregar cliente</button></a>
+                                 <a href="{% url 'table_pagos' %}"> <button type="button" class="btn btn-secondary">Pagos</button></a>
+                                 <a href="{% url 'table_plan' %}"> <button type="button" class="btn btn-secondary">Plan</button></a>
+                                 <a href="{% url 'table_salud' %}"><button type="button" class="btn btn-success">Salud</button></a>
+                                 <a href="{% url 'agregar_cliente' %}"><button type="button" class="btn btn-success">Agregar cliente</button></a>
 
-                                <table id="datatablesSimple">
+                                 <table id="datatablesSimple">
                               
                                     <thead>
-                                     
+                                       
                                         <tr>
                                             <th>Nombre</th>
                                             <th>Apellido</th>
-                                            <th>Mail</th>
-                                            <th>Numero</th>
-                                            <th>Numero de emergencia</th>
-                                            <th>Nombre de n.emergecia</th>
+                                            <th>Plan</th>
+                                            <th>Dias</th>
+                                            <th>Disciplina</th>
+                                            <th>Profesor</th>
+                                       
                                         </tr>
                                     </thead>
                                     <tfoot>
                                         <tr>
-                                            <th>Name</th>
+                                            <th>Nombre</th>
                                             <th>Position</th>
                                             <th>Office</th>
                                             <th>Age</th>
@@ -159,20 +168,29 @@
                         
                                     {% for i in form %}
                                     <tr>                                          
-                                        <td> <a href="{% url 'modificar_contacto' i.id %}"> {{ i.nombre }} </a></td>
+                                        <td> <a href="{% url 'modificar_plan' i.id %}"> {{ i.nombre }} </a></td>
                                         <td>{{ i.apellido }}</td>
-                                        <td>{{ i.email}}</td>
-                                        <td>{{ i.telefono }}</td>
-                                        <td>{{ i.telefono_emergencia }}</td>
-                                        <td>{{ i.nombre_emergencia}}</td>
-                                   
+                                        <td>{{ i.plan }}</td>
+                                        <td>{{ i.dias }}</td>
+                                        <td>{{ i.profesor.disciplinas }}</td>
+                                        <td> {{ i.profesor }}</td>
+                                    
                                     </tr>
                                     {% endfor %}
+                               
                        
                                     <tbody>
                                         
                                     </tbody>
-                                    
+                                    <script>
+                                        /*agarrar los valores del dom y restarlos para sacar la diferencia de dias*/
+                                        const fecha_pago = document.querySelectorAll('.fecha_pago');
+                                        const fecha_vencimiento = document.querySelectorAll('.fecha_vencimiento');
+                                       console.log(fecha_pago[0]);
+                                       console.log(fecha_vencimiento[0]);
+                                       const diasVencer = typeof fecha_vencimiento
+                                       console.log(typeof fecha_vencimiento[0])
+                                    </script>
                                 </table>
                             </div>
                         </div>
@@ -196,7 +214,7 @@
         </div>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>
         
-        <script src="{% static 'starke_app/js/scripts.js' %}"></script>
+        
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.min.js" crossorigin="anonymous"></script>
         
@@ -208,5 +226,6 @@
     
            <!-- <script src="{% static 'starke_app/demo/chart-bar-demo.js' %}"></script>-->
        <script src="{% static 'starke_app/js/datatables-simple-demo.js' %}"></script>
+
     </body>
 </html>

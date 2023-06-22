@@ -78,13 +78,13 @@ class client_register_form(forms.ModelForm):
 class client_register_form(forms.ModelForm):
      
    
-      fecha_nacimiento= forms.DateField(widget=forms.DateInput(attrs={
+      '''fecha_nacimiento= forms.DateField(widget=forms.DateInput(attrs={
                                                                        'class':'form-control',
                                                                         'type':'date',
                                                                         'placeholder':'Fecha de nacimiento',
                                                                         'id':"DateEmail",
                                                                         'label':'Fecha de nacimiento'
-                                                                       },format = '%d/%m/%Y'), input_formats=settings.DATE_INPUT_FORMATS)
+                                                                       },format = '%d/%m/%Y'), input_formats=settings.DATE_INPUT_FORMATS)'''
       class Meta:
         model = client_register_model
         fields= '__all__'
@@ -162,22 +162,33 @@ class client_register_form(forms.ModelForm):
                            }
             ),
             
+          'fecha_nacimiento':forms.DateInput(
+             attrs={'class':'form-control',
+                   'type':'date',
+                   'placeholder':'Fecha de nacimiento',
+                   'id':"DateEmail",
+                   'label':'Fecha de nacimiento'}
+        ),
+            
         }
-      
-     
-'''         
-
-class client_plan_form(forms.ModelForm):
+        
+        
+class profesores_form(forms.ModelForm):
       class Meta:
-            model = cliente_plan_model
+            model = profesores_model
             fields = '__all__'
-            widgets = {'pago':forms.NumberInput(
-                  attrs = {'class': 'form-control',
-                           'id':'agregarElPagoDelPlan',
-                           'type':'number',
-                           }
-            ),
-                  
-            }        
-      
-'''
+            widgets = {'profesor':forms.TextInput(
+                        attrs={'class':'form-control',
+                        'type':'text',
+                        'placeholder':'Nombre de profesor',
+                        'id':"inputFirstName",
+                        'label':'Nombre de profesor'}
+                        ),
+                       'disciplina':forms.TextInput(
+                        attrs={'class':'form-control',
+                        'type':'text',
+                        'placeholder':'Nombre de profesor',
+                        'id':"inputFirstName",
+                        'label':'Nombre de profesor'}
+                        ),
+                       }
