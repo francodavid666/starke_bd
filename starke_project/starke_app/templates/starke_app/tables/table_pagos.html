@@ -143,7 +143,7 @@
 
                                  <table id="datatablesSimple">
                               
-                                    <thead>
+                                    <thead >
                                        
                                         <tr>
                                             <th>Nombre</th>
@@ -153,6 +153,7 @@
                                             <th>Fecha Ult. Pago</th>
                                             <th>Fecha Vencimiento</th>
                                             <th>Pago-Monto</th>
+                                            <th>Dias a vencer</th>
                                         
                                         </tr>
                                     </thead>
@@ -168,7 +169,7 @@
                                     </tfoot>
                         
                                     {% for i in form %}
-                                    <tr>                                          
+                                    <tr id="tabla">                                          
                                         <td> <a href="{% url 'modificar_pago' i.id %}"> {{ i.nombre }} </a></td>
                                         <td>{{ i.apellido }}</td>
                                         <td>{{ i.plan }}</td>
@@ -176,25 +177,29 @@
                                         <td class="fecha_pago">{{ i.fecha_pago }}</td>
                                         <td class="fecha_vencimiento">{{ i.fecha_vencimiento }}</td>
                                         <td >{{ i.pago }}</td>
+                              
+                                        <td>{{ i.fecha_vencimiento }}</td>
+                                   
+                                 
 
                                 
                                     </tr>
+                                    
                                     {% endfor %}
-                               
+                                    <script>
+                                        /*agarrar los valores del dom y restarlos para sacar la diferencia de dias
+                                        const tabla= document.getElementById('tabla');
+                                        const dato = document.createElement('td')
+                                        dato.textContent='holasa'
+                                  
+
+                                        tabla.appendChild(dato)*/
+                                    </script>
                        
                                     <tbody>
                                         
                                     </tbody>
-                                    <script>
-                                        /*agarrar los valores del dom y restarlos para sacar la diferencia de dias*/
-                                        const fecha_pago = document.querySelectorAll('.fecha_pago');
-                                        const fecha_vencimiento = document.querySelectorAll('.fecha_vencimiento');
-                                        
-                                       console.log(fecha_pago[0]);
-                                       console.log(fecha_vencimiento[0]);
-                                       const diasVencer = typeof fecha_vencimiento
-                                       console.log(typeof fecha_vencimiento[0])
-                                    </script>
+                                    
                                 </table>
                             </div>
                         </div>

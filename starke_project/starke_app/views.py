@@ -28,16 +28,18 @@ def tables(request):
     return render(request,'starke_app/tables/tables.html',{'form':form})
 
 def table_pagos(request):
-    
-    
+
+    hoy= datetime.datetime.now()
+    dia= datetime.datetime.strftime(hoy,'%Y-%b-%d')
+
     form= client_register_model.objects.all()
+    
+
  
-    form2= len(client_register_model.objects.filter(nombre = True))
-    print(form2)
+ 
     return render(request,'starke_app/tables/table_pagos.html',{'form':form,
-                                                                'form2':form2
-                                                                })
-    print(form2)
+                                                                'dia':dia})
+   
 
 def table_salud(request):
     form= client_register_model.objects.all()
@@ -75,6 +77,9 @@ def agregar_cliente(request):
             dias=info.get('dias')
             plan=info.get('plan')
             pago=info.get('pago')
+            
+            
+            #diferencia = 'dia de pago - dias a vencer' hacer la resta de los dias aca.
   
             
             cliente_1 = client_register_model(nombre = nombre,
