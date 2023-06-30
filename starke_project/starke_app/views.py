@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-import pandas as pd
+
 from django.contrib import messages
 import sqlite3 
 from .models import *
