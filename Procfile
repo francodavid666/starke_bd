@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn starke_project/starke_project.wsgi
+web: gunicorn starke_project2.wsgi --log-file-
