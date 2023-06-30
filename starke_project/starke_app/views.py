@@ -61,6 +61,7 @@ def agregar_cliente(request):
             nombre=info.get('nombre')
             apellido=info.get('apellido')
             edad=info.get('edad')
+            fecha_nacimiento=info.get('fecha_nacimiento')
             email=info.get('email')
             telefono=info.get('telefono')
             telefono_emergencia=info.get('telefono_emergencia')
@@ -78,6 +79,10 @@ def agregar_cliente(request):
             plan=info.get('plan')
             pago=info.get('pago')
             
+            fecha_vencimiento=info.get('fecha_vencimiento')
+            fecha_pago=info.get('fecha_pago')
+            fecha_inicio=info.get('fecha_inicio')
+            
             
             #diferencia = 'dia de pago - dias a vencer' hacer la resta de los dias aca.
   
@@ -85,6 +90,7 @@ def agregar_cliente(request):
             cliente_1 = client_register_model(nombre = nombre,
                                               apellido= apellido,
                                               edad= edad,     
+                                              fecha_nacimiento = fecha_nacimiento,
                                               email = email,
                                               telefono = telefono,
                                               telefono_emergencia = telefono_emergencia,
@@ -97,11 +103,14 @@ def agregar_cliente(request):
                                               disciplina = disciplina,
                                               dias = dias,
                                               plan=plan,
-                                              pago=pago 
+                                              pago=pago, 
+                                              fecha_pago = fecha_pago,
+                                              fecha_inicio = fecha_inicio,
+                                              fecha_vencimiento=fecha_vencimiento
                                               )
             
             cliente_1.save()
-            return redirect('index')
+            return redirect('tables')
     else:    
         messages.success (request,'¡Nuevo producto creado!')    
         form = client_register_form()
@@ -124,6 +133,8 @@ def modificar_pago(request,id):
         if form.is_valid():
             info = form.cleaned_data
             cliente.pago = info['pago']
+            cliente.fecha_pago = info['fecha_pago']
+            cliente.fecha_vencimiento =info['fecha_vencimiento']
             
             cliente.save()
             return redirect('table_pagos')
@@ -131,7 +142,9 @@ def modificar_pago(request,id):
         
     else:    
         form = client_register_form(initial={
-        'pago':555
+        'pago':cliente.pago,
+        'fecha_pago':cliente.fecha_pago,
+         'fecha_vencimiento':cliente.fecha_vencimiento,
         })
         return render(request,'starke_app/modificar/modificar_pago.html',{'form':form,'id':id}) 
     
@@ -146,6 +159,7 @@ def modificar_plan(request,id):
             cliente.plan = info['plan']
             cliente.dias = info['dias']
             cliente.profesor = info['profesor']
+            
             
             
             cliente.save()
@@ -175,6 +189,7 @@ def modificar_datos(request,id):
             cliente.apellido = info['apellido']
             cliente.edad = info['edad']
             cliente.fecha_nacimiento = info['fecha_nacimiento']
+            cliente.fecha_inicio = info['fecha_inicio']
             
             cliente.save()
             return redirect('tables')
@@ -189,7 +204,8 @@ def modificar_datos(request,id):
         })
         return render(request,'starke_app/modificar/modificar_datos.html',{'form':form,'id':id,
                                                                            'nombre':cliente.nombre,
-                                                                           'apellido':cliente.apellido}) 
+                                                                           'apellido':cliente.apellido,
+                                                                           'fecha_inicio':cliente.fecha_inicio}) 
         
 def modificar_contacto(request,id):
     cliente = client_register_model.objects.get(id=id)
@@ -297,3 +313,57 @@ def modificar_profesor(request,id):
                         })
         return render (request, 'starke_app/profesores/modificar_profesor.html',{'form':form,'id':id})
               
+              
+              
+              
+              
+              
+              
+def eliminar_profesor(request,id):
+    elementos = profesores_model.objects.filter(id=id)
+    if len(elementos)!=0:
+        elemento=elementos[0]
+        elemento.delete()
+        messages.success(request,'¡Eliminado correctamente!')
+    return redirect ('profesores_tabla')
+
+
+
+
+def tabla_disciplina(request):
+ 
+    form= disciplinas_model.objects.all()
+    return render(request,'starke_app/disciplinas/tabla_disciplina.html',{'form':form})
+
+
+
+              
+def eliminar_cliente(request,id):
+    elementos = client_register_model.objects.filter(id=id)
+    if len(elementos)!=0:
+        elemento=elementos[0]
+        elemento.delete()
+        messages.success(request,'¡Eliminado correctamente!')
+    return redirect ('tables')
+
+
+def modificar_disciplina(request,id):
+    cliente = client_register_model.objects.get(id=id)
+    if request.method=='POST':
+        
+        form = client_register_form(request.POST)
+        if form.is_valid():
+            info = form.cleaned_data
+            cliente.disciplina = info['disciplina']
+         
+            
+            cliente.save()
+            return redirect('tabla_disciplina')
+
+        
+    else:    
+        form = client_register_form(initial={
+        'disciplina':cliente.disciplina,
+     
+        })
+        return render(request,'starke_app/disciplinas/modificar_disciplina.html',{'form':form,'id':id}) 

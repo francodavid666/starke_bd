@@ -119,9 +119,9 @@
                                     <thead>
                                      
                                         <tr>
-                                            <th>Nombre</th>
+                                          
                                             <th>Disciplina</th>
-                                            <th>Alumnos</th>
+                                      
                                             <th>Eliminar</th>
                                         
                                            
@@ -140,9 +140,9 @@
                         
                                     {% for i in form %}
                                     <tr>                                          
-                                        <td> <a href="{% url 'modificar_profesor' i.id %}"> {{ i.profesor }} </a></td>
-                                        <td>{{ i.disciplinas  }}</td>
-                                        <td>{{ i.disciplinas }}</td>
+                                        <td> <a href="{% url 'modificar_disciplina' i.id %}"> {{ i.disciplina }} </a></td>
+                        
+                                  
                                         <td> <a href="{% url 'eliminar_profesor' i.id %}"><button type="button" class="btn btn-danger">Eliminar</button></a>
                                         </td>
                                      

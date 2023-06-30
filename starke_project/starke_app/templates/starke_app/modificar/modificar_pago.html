@@ -23,10 +23,27 @@
                                     <div class="card-body">
                                         <form  action="{% url 'modificar_pago' id %}" method ='POST'>{% csrf_token %}
                                            
-                                            <div class="form-floating mb-3">
-                                                {{ form.pago }}
-                                                <label for="agregarElPagoDelPlan">Agregar el pago del plan</label>
-                                                <div class="invalid-feedback" data-sb-feedback="agregarElPagoDelPlan:required">Agregar el pago del plan is required.</div>
+                                                  
+                                            <div class="row mb-3">
+                                            <div class="col-md-6">
+                                                <div class="form-floating mb-3">
+                                                    {{ form.pago }}
+                                                    <label for="agregarElPagoDelPlan">Agregar el pago del plan</label>
+                                                    <div class="invalid-feedback" data-sb-feedback="agregarElPagoDelPlan:required">Agregar el pago del plan is required.</div>
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    {{ form.fecha_pago }}           
+                                                    <label for="inputLastName">Fecha ultimo pago</label>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-md-6">
+                                                <div class="form-floating">
+                                                    {{ form.fecha_vencimiento }}           
+                                                    <label for="inputLastName">Fecha de vencimiento</label>
+                                                </div>
                                             </div>
                                             <div class="mt-4 mb-0">
                                                 <div class="d-grid"><input type="submit" class="btn btn-primary btn-block" value="Aceptar datos"> </div>

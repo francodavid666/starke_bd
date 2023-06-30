@@ -169,6 +169,29 @@ class client_register_form(forms.ModelForm):
                    'id':"DateEmail",
                    'label':'Fecha de nacimiento'}
         ),
+           'fecha_inicio':forms.DateInput(
+             attrs={'class':'form-control',
+                   'type':'date',
+                   'placeholder':'Fecha de inicio',
+                   'id':"DateEmail",
+                   'label':'Fecha de inicio'}
+        ),
+              
+          'fecha_vencimiento':forms.DateInput(
+             attrs={'class':'form-control',
+                   'type':'date',
+                   'placeholder':'Fecha de vencimiento',
+                   'id':"DateEmail",
+                   'label':'Fecha de vencimiento'}
+        ),
+                 
+          'fecha_pago':forms.DateInput(
+             attrs={'class':'form-control',
+                   'type':'date',
+                   'placeholder':'Fecha de inicio',
+                   'id':"DateEmail",
+                   'label':'Fecha de inicio'}
+        ),
             
         }
         

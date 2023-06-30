@@ -21,5 +21,9 @@ urlpatterns=[
     path('profesores_tabla/',profesores_tabla, name = 'profesores_tabla'),
     path('agregar_profesor/',agregar_profesor, name = 'agregar_profesor'),
     path('modificar_profesor/<id>',modificar_profesor, name = 'modificar_profesor'),
+    path('eliminar_profesor/<id>',eliminar_profesor, name = 'eliminar_profesor'),
+    path('eliminar_cliente/<id>',eliminar_cliente, name = 'eliminar_cliente'),
+    path('tabla_disciplina/',tabla_disciplina, name = 'tabla_disciplina'),
+    path('modificar_disciplina/<id>',modificar_disciplina, name = 'modificar_disciplina'),
   
 ]
