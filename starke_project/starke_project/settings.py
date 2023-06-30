@@ -75,14 +75,15 @@ WSGI_APPLICATION = 'starke_project.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
+
 DATABASES = {
     'default': {
         'ENGINE' : 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'starke_bd',
+        'NAME': 'railway',
         'USER': 'postgres',
-        'PASSWORD': 'BIUTUX333',
-        'HOST': 'localhost',
-        'PORT': 5432
+        'PASSWORD': 'w02cAZTXWd58ajjFfSVU',
+        'HOST': 'containers-us-west-50.railway.app',
+        'PORT': 6728
         
     }
 }
