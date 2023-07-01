@@ -1,1 +1,1 @@
-web: python manage.py migrate && gunicorn starke_project.wsgi
+web:gunicorn starke_project.wsgi
